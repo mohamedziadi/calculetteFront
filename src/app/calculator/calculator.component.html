@@ -1,4 +1,4 @@
-<h1>Laine's Calculator</h1>
+<h1>Calculette</h1>
 
 <div class="display">{{ display }}</div>
 
@@ -16,10 +16,10 @@
 </div>
 
 <div class="operator-buttons">
-  <div class="button button-m" (click)="oper('m')">x</div>
-  <div class="button button-d" (click)="oper('d')">/</div>
-  <div class="button button-a" (click)="oper('a')">+</div>
-  <div class="button button-s" (click)="oper('s')">-</div>
+  <div class="button button-m" (click)="operation('addition')">+</div>
+  <div class="button button-d" (click)="operation('substract')">-</div>
+  <div class="button button-a" (click)="operation('multiply')">x</div>
+  <div class="button button-s" (click)="operation('divide')">/</div>
 </div>
 
 <button class="equals" (click)="calculate()">=</button>

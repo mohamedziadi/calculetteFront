@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {CalculatorServiceService} from "../services/calculator.service.service";
 
 @Component({
   selector: 'app-calculator',
@@ -8,6 +9,9 @@ import { Component } from '@angular/core';
   styleUrl: './calculator.component.css'
 })
 export class CalculatorComponent {
+
+  constructor(private calculatorServiceService:CalculatorServiceService) {
+  }
   title = 'calculette';
   display = '0';
   firstValue: number = 0;
@@ -21,32 +25,45 @@ export class CalculatorComponent {
     }
   }
 
-  oper(action:string) {
+  operation(action:string) {
     this.firstValue = parseFloat(this.display);
     this.action = action;
     this.display = ' ';
   }
 
   calculate() {
-    debugger;
     const a = this.firstValue;
     const b = parseFloat(this.display);
 
     let result = 0;
-    if (this.action === 'm') {
-      result = a * b;
+    if (this.action === 'addition') {
+      this.calculatorServiceService.addOpration({number1:a,number2:b}).subscribe(value => {
+        if (value){
+          this.display = value.toString();
+        }
+      })
     }
-    else if (this.action === 'd') {
-      result = a / b;
+    else if (this.action === 'substract') {
+      this.calculatorServiceService.substructOpration({number1:a,number2:b}).subscribe(value => {
+        if (value){
+          this.display = value.toString();
+        }
+      })
     }
-    else if (this.action === 'a') {
-      result = a + b;
+    else if (this.action === 'multiply') {
+      this.calculatorServiceService.multiplyOpration({number1:a,number2:b}).subscribe(value => {
+        if (value){
+          this.display = value.toString();
+        }
+      })
     }
-    else if (this.action === 's') {
-      result = a - b;
+    else if (this.action === 'divide') {
+      this.calculatorServiceService.divideOpration({number1:a,number2:b}).subscribe(value => {
+        if (value){
+          this.display = value.toString();
+        }
+      })
     }
 
-    this.firstValue = result;
-    this.display = result.toString();
   }
 }
